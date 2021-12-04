@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pcano-d
+  labels:
+    estado: "1"
+spec:
+  selector:
+    matchLabels:
+      app: app-pcano-dev
+  replicas: 7
+  template:
+    metadata:
+      labels:
+        app: app-pcano-dev
+    spec:
+#      volumes:
+#      - name: pcano-storage
+#        persistentVolumeClaim:
+#          claimName: pcano-volume-claim
+      containers:
+      - name: app-pcano-dev
+        image: canodev91/app-pcano-dev
+        ports:
+        - containerPort: 80
+          name: "http-server"
+#        volumeMounts:
+#        - name: pcano-storage
+#          mountPath: /var/lib/mysql
